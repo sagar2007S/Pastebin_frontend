@@ -2,13 +2,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
+
+const API_URL = import.meta.env.VITE_API_URL;
 //-------------------------------- All Pastes --------------------------------------------------------------------------------------------
 export const getAllPastes = createAsyncThunk(
   "user/pastes",
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get(
-        "http://localhost:4000/api/v2/pastes/user/all-pastes",
+        `${API_URL}/api/v2/pastes/user/all-pastes`,
         {
           withCredentials: true,
         },
@@ -27,7 +29,7 @@ export const createNewPaste = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/api/v2/pastes/user/create-paste",
+        `${API_URL}/api/v2/pastes/user/create-paste`,
         credentials,
         {
           withCredentials: true,
@@ -47,7 +49,7 @@ export const getPasteById = createAsyncThunk(
   async (pasteId, { rejectWithValue }) => {
     try {
       const res = await axios.get(
-        `http://localhost:4000/api/v2/pastes/user/paste/${pasteId}`,
+        `${API_URL}/api/v2/pastes/user/paste/${pasteId}`,
         {
           withCredentials: true,
         },
@@ -65,7 +67,7 @@ export const deletePaste = createAsyncThunk(
   async (pasteId, { rejectWithValue }) => {
     try {
       const res = await axios.delete(
-        `http://localhost:4000/api/v2/pastes/user/paste/${pasteId}`,
+        `${API_URL}/api/v2/pastes/user/paste/${pasteId}`,
         {
           withCredentials: true,
         },
@@ -102,7 +104,7 @@ export const updatePaste = createAsyncThunk(
   async ({ pasteId, paste }, { rejectWithValue }) => {
     try {
       const res = await axios.put(
-        `http://localhost:4000/api/v2/pastes/user/paste/updatePaste/${pasteId}`,
+        `${API_URL}/api/v2/pastes/user/paste/updatePaste/${pasteId}`,
         paste, // 👈 actual data (title, value)
         {
           withCredentials: true, // 👈 config (cookies)
