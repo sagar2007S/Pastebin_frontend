@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+.active{
+color: #ba75f6;
+border-bottom: 4px solid #ba75f6;
+
+}
