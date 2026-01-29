@@ -19,7 +19,7 @@ const ViewPaste = () => {
    }, [])
 
   const paste= useSelector((state)=> state.paste.currentPaste)
-  const loading= useSelector((state)=> state.paste)
+  const loading= useSelector((state)=> state.paste.loading)
   console.log(loading)
   console.log(`This is Paste from ViewPaste Page ${paste?._id}`)
 
