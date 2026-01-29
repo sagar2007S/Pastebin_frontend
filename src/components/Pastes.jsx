@@ -17,7 +17,8 @@ const Pastes = () => {
    dispatch(getAllPastes())
   }, [dispatch])
 
-   const pastes = useSelector((state) => state.paste?.pastes || []);
+   const pastes = useSelector((state) => state.paste?.pastes || [])
+    const loading = useSelector((state) => state.paste.loading);
   console.log(`This are all Pastes ${pastes}`)
   // pastes.map((paste)=>{
   //   console.log(paste.title)
@@ -54,6 +55,46 @@ if (navigator.share) {
     toast.warning("Sharing not supported on this browser.");
   }
 }
+
+
+
+if(loading){
+    return <>
+ <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+      <div className="text-center">
+        {/* Animated Logo */}
+        <div className="mb-8">
+          <h1 className="text-6xl font-bold text-white mb-4 animate-pulse">
+            Paste<span className="text-purple-400">Bin</span>
+          </h1>
+        </div>
+
+        {/* Spinner */}
+        <div className="flex justify-center mb-6">
+          <div className="relative w-20 h-20">
+            {/* Outer ring */}
+            <div className="absolute inset-0 border-4 border-purple-400 border-opacity-20 rounded-full"></div>
+            {/* Spinning ring */}
+            <div className="absolute inset-0 border-4 border-transparent border-t-purple-400 border-r-purple-400 rounded-full animate-spin"></div>
+          </div>
+        </div>
+
+        {/* Loading text */}
+        <p className="text-gray-300 text-lg font-medium animate-pulse">
+          Loading...
+        </p>
+
+        {/* Dots animation */}
+        <div className="flex justify-center gap-2 mt-4">
+          <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '0ms'}}></div>
+          <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '150ms'}}></div>
+          <div className="w-3 h-3 bg-purple-400 rounded-full animate-bounce" style={{animationDelay: '300ms'}}></div>
+        </div>
+      </div>
+    </div>
+  </>
+}
+else{
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-6 flex flex-col items-center gap-6">
@@ -100,11 +141,13 @@ if (navigator.share) {
               </div>
 
             )
-          })}
+          })
+          }
       </div>
     
     </div>
   );
+  }
 };
 
 export default Pastes;
